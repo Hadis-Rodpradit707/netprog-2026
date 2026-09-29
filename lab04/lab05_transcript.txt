@@ -1,0 +1,384 @@
+Script started on 2026-09-29 19:57:24+07:00 [TERM="xterm-256color" TTY="/dev/pts/0" COLUMNS="80" LINES="24"]
+[?2004h]0;diz@diz: ~[01;32mdiz@diz[00m:[01;34m~[00m$ 
+[?2004l[?2004h]0;diz@diz: ~[01;32mdiz@diz[00m:[01;34m~[00m$ [7msudo mn -c[27msudo mn -c
+[?2004l[sudo] password for diz: 
+*** Removing excess controllers/ofprotocols/ofdatapaths/pings/noxes
+killall controller ofprotocol ofdatapath ping nox_core lt-nox_core ovs-openflowd ovs-controller ovs-testcontroller udpbwtest mnexec ivs ryu-manager  2> /dev/null
+killall -9 controller ofprotocol ofdatapath ping nox_core lt-nox_core ovs-openflowd ovs-controller ovs-testcontroller udpbwtest mnexec ivs ryu-manager  2> /dev/null
+pkill -9 -f "sudo mnexec"
+*** Removing junk from /tmp
+rm -f /tmp/vconn* /tmp/vlogs* /tmp/*.out /tmp/*.log
+*** Removing old X11 tunnels
+*** Removing excess kernel datapaths
+ps ax | egrep -o 'dp[0-9]+' | sed 's/dp/nl:/'
+***  Removing OVS datapaths
+ovs-vsctl --timeout=1 list-br
+ovs-vsctl --timeout=1 list-br
+*** Removing all links of the pattern foo-ethX
+ip link show | egrep -o '([-_.[:alnum:]]+-eth[[:digit:]]+)'
+ip link show
+*** Killing stale mininet node processes
+pkill -9 -f mininet:
+*** Shutting down stale tunnels
+pkill -9 -f Tunnel=Ethernet
+pkill -9 -f .ssh/mn
+rm -f ~/.ssh/mn/*
+*** Cleanup complete.
+
+*** Removing WiFi module and Configurations
+[?2004h]0;diz@diz: ~[01;32mdiz@diz[00m:[01;34m~[00m$ 
+[?2004l[?2004h]0;diz@diz: ~[01;32mdiz@diz[00m:[01;34m~[00m$ 
+[?2004l[?2004h]0;diz@diz: ~[01;32mdiz@diz[00m:[01;34m~[00m$ [7msudo mn --topo single,3[27m[C[C[C[C[C[C[C[C[C[C[Csudo mn --topo single,3
+[?2004l*** Creating network
+*** Adding controller
+*** Adding hosts:
+h1 h2 h3 
+*** Adding switches:
+s1 
+*** Adding links:
+(h1, s1) (h2, s1) (h3, s1) 
+*** Configuring hosts
+h1 h2 h3 
+*** Starting controller
+c0 
+*** Starting 1 switches
+s1 ...
+*** Starting CLI:
+mininet-wifi> 
+mininet-wifi> nodes
+available nodes are: 
+c0 h1 h2 h3 s1
+mininet-wifi> 
+mininet-wifi> net
+h1 h1-eth0:s1-eth1
+h2 h2-eth0:s1-eth2
+h3 h3-eth0:s1-eth3
+s1 lo:  s1-eth1:h1-eth0 s1-eth2:h2-eth0 s1-eth3:h3-eth0
+c0
+mininet-wifi> 
+mininet-wifi> dump
+<Host h1: h1-eth0:10.0.0.1 pid=10176> 
+<Host h2: h2-eth0:10.0.0.2 pid=10178> 
+<Host h3: h3-eth0:10.0.0.3 pid=10180> 
+<OVSSwitch s1: lo:127.0.0.1,s1-eth1:None,s1-eth2:None,s1-eth3:None pid=10185> 
+<Controller c0: 127.0.0.1:6653 pid=10169> 
+mininet-wifi> 
+mininet-wifi> pingall
+*** Ping: testing ping reachability
+h1 -> h2 h3 
+h2 -> h1 h3 
+h3 -> h1 h2 
+*** Results: 0% dropped (6/6 received)
+mininet-wifi> [Kmininet-wifi> [Kmininet-wifi> 
+mininet-wifi> 
+mininet-wifi> iperf
+*** Iperf: testing TCP bandwidth between h1 and h3 
+*** Results: ['30.0 Gbits/sec', '30.0 Gbits/sec']
+mininet-wifi> 
+mininet-wifi> h1 ping -c 5 h3
+PING 10.0.0.3 (10.0.0.3) 56(84) bytes of data.
+64 bytes from 10.0.0.3: icmp_seq=1 ttl=64 time=1.65 ms
+64 bytes from 10.0.0.3: icmp_seq=2 ttl=64 time=0.621 ms
+64 bytes from 10.0.0.3: icmp_seq=3 ttl=64 time=0.108 ms
+64 bytes from 10.0.0.3: icmp_seq=4 ttl=64 time=0.100 ms
+64 bytes from 10.0.0.3: icmp_seq=5 ttl=64 time=0.105 ms
+
+--- 10.0.0.3 ping statistics ---
+5 packets transmitted, 5 received, 0% packet loss, time 4069ms
+rtt min/avg/max/mdev = 0.100/0.517/1.654/0.602 ms
+mininet-wifi> 
+mininet-wifi> 
+mininet-wifi> exit
+*** Stopping 1 controllers
+c0 
+*** Stopping 3 links
+...
+*** Stopping 1 switches
+s1 
+*** Stopping 3 hosts
+h1 h2 h3 
+*** Done
+completed in 124.223 seconds
+[?2004h]0;diz@diz: ~[01;32mdiz@diz[00m:[01;34m~[00m$ 
+[?2004l[?2004h]0;diz@diz: ~[01;32mdiz@diz[00m:[01;34m~[00m$ 
+[?2004l[?2004h]0;diz@diz: ~[01;32mdiz@diz[00m:[01;34m~[00m$ [7msudo mn --topo linear,4[27m[C[C[C[C[C[C[C[C[C[C[Csudo mn --topo linear,4
+[?2004l*** Creating network
+*** Adding controller
+*** Adding hosts:
+h1 h2 h3 h4 
+*** Adding switches:
+s1 s2 s3 s4 
+*** Adding links:
+(h1, s1) (h2, s2) (h3, s3) (h4, s4) (s2, s1) (s3, s2) (s4, s3) 
+*** Configuring hosts
+h1 h2 h3 h4 
+*** Starting controller
+c0 
+*** Starting 4 switches
+s1 s2 s3 s4 ...
+*** Starting CLI:
+mininet-wifi> 
+mininet-wifi> 
+mininet-wifi> net
+h1 h1-eth0:s1-eth1
+h2 h2-eth0:s2-eth1
+h3 h3-eth0:s3-eth1
+h4 h4-eth0:s4-eth1
+s1 lo:  s1-eth1:h1-eth0 s1-eth2:s2-eth2
+s2 lo:  s2-eth1:h2-eth0 s2-eth2:s1-eth2 s2-eth3:s3-eth2
+s3 lo:  s3-eth1:h3-eth0 s3-eth2:s2-eth3 s3-eth3:s4-eth2
+s4 lo:  s4-eth1:h4-eth0 s4-eth2:s3-eth3
+c0
+mininet-wifi> 
+mininet-wifi> pi[K[K
+mininet-wifi> pinm[K[Kngall
+*** Ping: testing ping reachability
+h1 -> h2 h3 h4 
+h2 -> h1 h3 h4 
+h3 -> h1 h2 h4 
+h4 -> h1 h2 h3 
+*** Results: 0% dropped (12/12 received)
+mininet-wifi> 
+mininet-wifi> 
+mininet-wifi> h1 ping -c 5 h4
+PING 10.0.0.4 (10.0.0.4) 56(84) bytes of data.
+64 bytes from 10.0.0.4: icmp_seq=1 ttl=64 time=1.47 ms
+64 bytes from 10.0.0.4: icmp_seq=2 ttl=64 time=0.148 ms
+64 bytes from 10.0.0.4: icmp_seq=3 ttl=64 time=0.120 ms
+64 bytes from 10.0.0.4: icmp_seq=4 ttl=64 time=0.130 ms
+64 bytes from 10.0.0.4: icmp_seq=5 ttl=64 time=0.134 ms
+
+--- 10.0.0.4 ping statistics ---
+5 packets transmitted, 5 received, 0% packet loss, time 4098ms
+rtt min/avg/max/mdev = 0.120/0.399/1.466/0.533 ms
+mininet-wifi> 
+mininet-wifi> 
+mininet-wifi> exit
+*** Stopping 1 controllers
+c0 
+*** Stopping 7 links
+.......
+*** Stopping 4 switches
+s1 s2 s3 s4 
+*** Stopping 4 hosts
+h1 h2 h3 h4 
+*** Done
+completed in 52.524 seconds
+[?2004h]0;diz@diz: ~[01;32mdiz@diz[00m:[01;34m~[00m$ 
+[?2004l[?2004h]0;diz@diz: ~[01;32mdiz@diz[00m:[01;34m~[00m$ 
+[?2004l[?2004h]0;diz@diz: ~[01;32mdiz@diz[00m:[01;34m~[00m$ [7msudo mn --topo tree,depth=2,fanout=2[27m[C[C[C[C[C[C[C[C[C[C[Csudo mn --topo tree,depth=2,fanout=2
+[?2004l*** Creating network
+*** Adding controller
+*** Adding hosts:
+h1 h2 h3 h4 
+*** Adding switches:
+s1 s2 s3 
+*** Adding links:
+(s1, s2) (s1, s3) (s2, h1) (s2, h2) (s3, h3) (s3, h4) 
+*** Configuring hosts
+h1 h2 h3 h4 
+*** Starting controller
+c0 
+*** Starting 3 switches
+s1 s2 s3 ...
+*** Starting CLI:
+mininet-wifi> 
+mininet-wifi> 
+mininet-wifi> net
+h1 h1-eth0:s2-eth1
+h2 h2-eth0:s2-eth2
+h3 h3-eth0:s3-eth1
+h4 h4-eth0:s3-eth2
+s1 lo:  s1-eth1:s2-eth3 s1-eth2:s3-eth3
+s2 lo:  s2-eth1:h1-eth0 s2-eth2:h2-eth0 s2-eth3:s1-eth1
+s3 lo:  s3-eth1:h3-eth0 s3-eth2:h4-eth0 s3-eth3:s1-eth2
+c0
+mininet-wifi> 
+mininet-wifi> 
+mininet-wifi> pingall
+*** Ping: testing ping reachability
+h1 -> h2 h3 h4 
+h2 -> h1 h3 h4 
+h3 -> h1 h2 h4 
+h4 -> h1 h2 h3 
+*** Results: 0% dropped (12/12 received)
+mininet-wifi> 
+mininet-wifi> exit
+*** Stopping 1 controllers
+c0 
+*** Stopping 6 links
+......
+*** Stopping 3 switches
+s1 s2 s3 
+*** Stopping 4 hosts
+h1 h2 h3 h4 
+*** Done
+completed in 38.153 seconds
+[?2004h]0;diz@diz: ~[01;32mdiz@diz[00m:[01;34m~[00m$ 
+[?2004l[?2004h]0;diz@diz: ~[01;32mdiz@diz[00m:[01;34m~[00m$ 
+[?2004l[?2004h]0;diz@diz: ~[01;32mdiz@diz[00m:[01;34m~[00m$ [7msudo mn --topo tree,depth=3,fanout=2[27m[C[C[C[C[C[C[C[C[C[C[Csudo mn --topo tree,depth=3,fanout=2
+[?2004l*** Creating network
+*** Adding controller
+*** Adding hosts:
+h1 h2 h3 h4 h5 h6 h7 h8 
+*** Adding switches:
+s1 s2 s3 s4 s5 s6 s7 
+*** Adding links:
+(s1, s2) (s1, s5) (s2, s3) (s2, s4) (s3, h1) (s3, h2) (s4, h3) (s4, h4) (s5, s6) (s5, s7) (s6, h5) (s6, h6) (s7, h7) (s7, h8) 
+*** Configuring hosts
+h1 h2 h3 h4 h5 h6 h7 h8 
+*** Starting controller
+c0 
+*** Starting 7 switches
+s1 s2 s3 s4 s5 s6 s7 ...
+*** Starting CLI:
+mininet-wifi> 
+mininet-wifi> net
+h1 h1-eth0:s3-eth1
+h2 h2-eth0:s3-eth2
+h3 h3-eth0:s4-eth1
+h4 h4-eth0:s4-eth2
+h5 h5-eth0:s6-eth1
+h6 h6-eth0:s6-eth2
+h7 h7-eth0:s7-eth1
+h8 h8-eth0:s7-eth2
+s1 lo:  s1-eth1:s2-eth3 s1-eth2:s5-eth3
+s2 lo:  s2-eth1:s3-eth3 s2-eth2:s4-eth3 s2-eth3:s1-eth1
+s3 lo:  s3-eth1:h1-eth0 s3-eth2:h2-eth0 s3-eth3:s2-eth1
+s4 lo:  s4-eth1:h3-eth0 s4-eth2:h4-eth0 s4-eth3:s2-eth2
+s5 lo:  s5-eth1:s6-eth3 s5-eth2:s7-eth3 s5-eth3:s1-eth2
+s6 lo:  s6-eth1:h5-eth0 s6-eth2:h6-eth0 s6-eth3:s5-eth1
+s7 lo:  s7-eth1:h7-eth0 s7-eth2:h8-eth0 s7-eth3:s5-eth2
+c0
+mininet-wifi> 
+mininet-wifi> pingall
+*** Ping: testing ping reachability
+h1 -> h2 h3 h4 h5 h6 h7 h8 
+h2 -> h1 h3 h4 h5 h6 h7 h8 
+h3 -> h1 h2 h4 h5 h6 h7 h8 
+h4 -> h1 h2 h3 h5 h6 h7 h8 
+h5 -> h1 h2 h3 h4 h6 h7 h8 
+h6 -> h1 h2 h3 h4 h5 h7 h8 
+h7 -> h1 h2 h3 h4 h5 h6 h8 
+h8 -> h1 h2 h3 h4 h5 h6 h7 
+*** Results: 0% dropped (56/56 received)
+mininet-wifi> 
+mininet-wifi> exit
+*** Stopping 1 controllers
+c0 
+*** Stopping 14 links
+..............
+*** Stopping 7 switches
+s1 s2 s3 s4 s5 s6 s7 
+*** Stopping 8 hosts
+h1 h2 h3 h4 h5 h6 h7 h8 
+*** Done
+completed in 17.525 seconds
+[?2004h]0;diz@diz: ~[01;32mdiz@diz[00m:[01;34m~[00m$ 
+[?2004l[?2004h]0;diz@diz: ~[01;32mdiz@diz[00m:[01;34m~[00m$ 
+[?2004l[?2004h]0;diz@diz: ~[01;32mdiz@diz[00m:[01;34m~[00m$ [7msudo mn --topo single,3[27m[C[C[C[C[C[C[C[C[C[C[Csudo mn --topo single,3
+[?2004l*** Creating network
+*** Adding controller
+*** Adding hosts:
+h1 h2 h3 
+*** Adding switches:
+s1 
+*** Adding links:
+(h1, s1) (h2, s1) (h3, s1) 
+*** Configuring hosts
+h1 h2 h3 
+*** Starting controller
+c0 
+*** Starting 1 switches
+s1 ...
+*** Starting CLI:
+mininet-wifi> 
+mininet-wifi> 
+mininet-wifi> pingall
+*** Ping: testing ping reachability
+h1 -> h2 h3 
+h2 -> h1 h3 
+h3 -> h1 h2 
+*** Results: 0% dropped (6/6 received)
+mininet-wifi> 
+mininet-wifi> link h1 s1 down
+mininet-wifi> link h1 s1 down[8Ppingalllink h1 s1 down[K
+mininet-wifi> link h1 s1 down[8Ppingall
+*** Ping: testing ping reachability
+h1 -> X X 
+h2 -> X h3 
+h3 -> X h2 
+*** Results: 66% dropped (2/6 received)
+mininet-wifi> 
+mininet-wifi> pingalllink h1 s1 down[K[K[K[Kup
+mininet-wifi> 
+mininet-wifi> link h1 s1 up[6Ppingall
+*** Ping: testing ping reachability
+h1 -> h2 h3 
+h2 -> h1 h3 
+h3 -> h1 h2 
+*** Results: 0% dropped (6/6 received)
+mininet-wifi> 
+mininet-wifi> exit
+*** Stopping 1 controllers
+c0 
+*** Stopping 3 links
+...
+*** Stopping 1 switches
+s1 
+*** Stopping 3 hosts
+h1 h2 h3 
+*** Done
+completed in 47.289 seconds
+[?2004h]0;diz@diz: ~[01;32mdiz@diz[00m:[01;34m~[00m$ 
+[?2004l[?2004h]0;diz@diz: ~[01;32mdiz@diz[00m:[01;34m~[00m$ 
+[?2004l[?2004h]0;diz@diz: ~[01;32mdiz@diz[00m:[01;34m~[00m$ [7msudo mn --topo single,3[27m[C[C[C[C[C[C[C[C[C[C[Csudo mn --topo single,3
+[?2004l*** Creating network
+*** Adding controller
+*** Adding hosts:
+h1 h2 h3 
+*** Adding switches:
+s1 
+*** Adding links:
+(h1, s1) (h2, s1) (h3, s1) 
+*** Configuring hosts
+h1 h2 h3 
+*** Starting controller
+c0 
+*** Starting 1 switches
+s1 ...
+*** Starting CLI:
+mininet-wifi> 
+mininet-wifi> xterm h2
+mininet-wifi> 
+mininet-wifi> h1 ping -c 5 h2
+PING 10.0.0.2 (10.0.0.2) 56(84) bytes of data.
+64 bytes from 10.0.0.2: icmp_seq=1 ttl=64 time=2.96 ms
+64 bytes from 10.0.0.2: icmp_seq=2 ttl=64 time=0.621 ms
+64 bytes from 10.0.0.2: icmp_seq=3 ttl=64 time=0.095 ms
+64 bytes from 10.0.0.2: icmp_seq=4 ttl=64 time=0.077 ms
+64 bytes from 10.0.0.2: icmp_seq=5 ttl=64 time=0.094 ms
+
+--- 10.0.0.2 ping statistics ---
+5 packets transmitted, 5 received, 0% packet loss, time 4073ms
+rtt min/avg/max/mdev = 0.077/0.768/2.955/1.112 ms
+mininet-wifi> 
+mininet-wifi> exit
+*** Stopping 1 controllers
+c0 
+*** Stopping 1 terms
+*** Stopping 3 links
+...
+*** Stopping 1 switches
+s1 
+*** Stopping 3 hosts
+h1 h2 h3 
+*** Done
+completed in 208.119 seconds
+[?2004h]0;diz@diz: ~[01;32mdiz@diz[00m:[01;34m~[00m$ 
+[?2004l[?2004h]0;diz@diz: ~[01;32mdiz@diz[00m:[01;34m~[00m$ 
+[?2004l[?2004h]0;diz@diz: ~[01;32mdiz@diz[00m:[01;34m~[00m$ [7mcd ~/netprog-2026[27m[C[C[C[C[C[C[C[C[C[C[Ccd ~/netprog-2026
+[?2004l[?2004h]0;diz@diz: ~/netprog-2026[01;32mdiz@diz[00m:[01;34m~/netprog-2026[00m$ 
+[?2004l[?2004h]0;diz@diz: ~/netprog-2026[01;32mdiz@diz[00m:[01;34m~/netprog-2026[00m$ [7mgit pull    [27mgit pull    
+[?2004lAlready up to date.
+[?2004h]0;diz@diz: ~/ne
