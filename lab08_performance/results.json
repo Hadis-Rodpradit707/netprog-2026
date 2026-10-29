@@ -1,0 +1,56 @@
+[
+  {
+    "throughput_mbps": 9.999,
+    "jitter_ms": 0.236,
+    "loss_percent": 0,
+    "received_mbps": 9.998,
+    "distance_m": 5,
+    "associated_to": "ap1-wlan1",
+    "signal_dbm": null
+  },
+  {
+    "throughput_mbps": 9.998,
+    "jitter_ms": 0.295,
+    "loss_percent": 0,
+    "received_mbps": 9.675,
+    "distance_m": 10,
+    "associated_to": "ap1-wlan1",
+    "signal_dbm": -49
+  },
+  {
+    "throughput_mbps": 9.999,
+    "jitter_ms": 0.336,
+    "loss_percent": 0,
+    "received_mbps": 9.205,
+    "distance_m": 15,
+    "associated_to": "ap1-wlan1",
+    "signal_dbm": -49
+  },
+  {
+    "throughput_mbps": 9.999,
+    "jitter_ms": 0.379,
+    "loss_percent": 0,
+    "received_mbps": 8.758,
+    "distance_m": 20,
+    "associated_to": "ap1-wlan1",
+    "signal_dbm": -49
+  },
+  {
+    "throughput_mbps": 9.999,
+    "jitter_ms": 0.423,
+    "loss_percent": 0,
+    "received_mbps": 8.331,
+    "distance_m": 25,
+    "associated_to": "ap1-wlan1",
+    "signal_dbm": -49
+  },
+  {
+    "throughput_mbps": 9.999,
+    "jitter_ms": 0.471,
+    "loss_percent": 0,
+    "received_mbps": 7.928,
+    "distance_m": 30,
+    "associated_to": "ap1-wlan1",
+    "signal_dbm": -49
+  }
+]
